@@ -12,20 +12,14 @@ extern keymap_config_t keymap_config;
 #define _L2 2
 #define _L3 3
 
-
-enum macro_keycodes {
-  KC_CMD_TAB,
-};
-
 // Macro name shortcuts
-#define QWERTY M(_QW)
+#define QWERTY  M(_QW)
 
 // Curly braces have their own keys. These are defined to make them not mess up
 // the grid in layer 2.
 #define L_CURBR LSFT(KC_LBRC)
 #define R_CURBR LSFT(KC_RBRC)
 #define SFT_ESC SFT_T(KC_ESC)  // Tap for Escape, hold for Shift
-#define CMD_TAB     M(KC_CMD_TAB)               // Macro for Cmd-Tab
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -113,26 +107,12 @@ void persistent_default_layer_set(uint16_t default_layer) {
 
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 {
-      if (!eeconfig_is_enabled()) {
-        eeconfig_init();
-      }
-
-      bool use_cmd = true;    // Use, for example, Cmd-Tab, Cmd-C, Cmd-V, etc.
-      // Compare to MAGIC_SWAP_ALT_GUI and MAGIC_UNSWAP_ALT_GUI configs, set in:
-      // quantum/quantum.c
-      if(keymap_config.swap_lalt_lgui == 1 && keymap_config.swap_ralt_rgui == 1) {
-        use_cmd = false;      // ... or, Alt-Tab, Ctrl-C, Ctrl-V, etc.
-      }
-
       switch(id) {
-        case _QW:
+       case _QW:
           if (record->event.pressed) {
             persistent_default_layer_set(1UL<<_QW);
           }
           break;
-        case KC_CMD_TAB:
-          if(use_cmd) { return (record->event.pressed ? MACRO( D(LGUI),  D(TAB), END ) : MACRO( U(TAB), END )); }
-          else        { return (record->event.pressed ? MACRO( D(LALT),  D(TAB), END ) : MACRO( U(TAB), END )); }
       }
     return MACRO_NONE;
 };
