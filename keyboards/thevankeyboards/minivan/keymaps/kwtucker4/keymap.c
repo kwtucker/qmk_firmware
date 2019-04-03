@@ -1,6 +1,6 @@
 #include QMK_KEYBOARD_H
 
-extern keymap_config_t keymap_config;
+// extern keymap_config_t keymap_config;
 
 // Each layer gets a name for readability, which is then used in the keymap matrix below.
 // The underscores don't mean anything - you can have a layer called STUFF or any other name.
@@ -40,7 +40,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,   KC_Q,     KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
     OSL(_L1), KC_A,     KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, OSL(_L2),
     SFT_ESC,  KC_Z,     KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSHIFT,
-    KC_LCTL,  KC_LALT	, KC_LGUI,                   KC_SPC,  KC_ENT,                    OSL(_L3), TG(_L2), TG(_L3)
+    KC_LCTL,  KC_LALT	, KC_LGUI,                   KC_SPC,  KC_ENT,                    OSL(_L3), TG(_L2), DF(_QW)
   ),
 
   /* Layer 1
@@ -48,36 +48,36 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * ,---------+------+------+------+------+------+------+------+------+------+------+-------------.
   * |   `/~   |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  |    TRNS     |
   * |---------`------`------`------`------`------`------`------`------`------`------`-------------|
-  * |   TRNS   |   \  |   '  |   -  |   =  |   [  |   ]  |   {  |   }  |   ?  |   :  |    TRNS    |
+  * |   TRNS   |   '  |   \  |   -  |   =  |   [  |   ]  |   {  |   }  |   ?  |   :  |    TRNS    |
   * |----------`------`------`------`------`------`------`------`------`------`------`------------|
   * |   TRNS    |      |  ESC |      |      |     |       |      |   <  |   >  | TRNS |   TRNS    |
   * |-----------`------`------`------`------`-----'-------`------`------`------`------`-----------|
-  * |   TRNS  |   TRNS  |   TRNS  |     TRNS       |     TRNS       |   TRNS  |         |         |
+  * |   TRNS  |   TRNS  |   TRNS  |     TRNS       |     TRNS       |  TRNS   |  TRNS   |  TRNS   |
   *  `--------+---------+---------+------^^^-------+-----^^^--------+---------+---------+---------'
   */
   [_L1] = LAYOUT( /* LAYER 1 */
     KC_GRV,  KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______,
-    _______, KC_BSLS, KC_QUOT, KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, L_CURBR, R_CURBR, KC_QUES, KC_COLN, _______,
+    _______, KC_QUOT, KC_BSLS, KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, L_CURBR, R_CURBR, KC_QUES, KC_COLN, _______,
     _______, XXXXXXX, KC_ESC,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_LABK, KC_RABK, _______, _______,
-    _______, _______, _______,                   _______, _______,                   _______, XXXXXXX, XXXXXXX
+    _______, _______, _______,                   _______, _______,                   _______, _______, _______
   ),
 
  /* LAYER 2
  * ,---------+------+------+------+------+------+------+------+------------+------+------------.
  * |    0    |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  |    TRNS    |
  * |---------`------`------`------`------`------`------`------`------`------`------`------------|
- * |   TRNS   |   |  |   "  |   _  |   +  |  {   |  }   |   4  |   5  |   6  |      |    TRNS   |
+ * |   TRNS   |   "  |   |  |   _  |   +  |  {   |  }   |   4  |   5  |   6  |      |    TRNS   |
  * |----------`------`------`------`------`------`------`------`------`------`------`-----------|
  * |   TRNS    | MUTE | VOLD | VOLU |      |      |       |   1  |   2  |   3  |      |  TRNS   |
  * |-----------`------`------`------`------`------`-------`------`------`------`------`---------|
- * |   TRNS  |   TRNS  |   TRNS  |     TRNS       |     TRNS       |         |   TRNS  |        |
+ * |   TRNS  |   TRNS  |   TRNS  |     TRNS       |     TRNS       |  TRNS   |  TRNS   |  TRNS  |
  *  `--------+---------+---------+------^^^-------+-----^^^--------+---------+---------+--------'
  */
   [_L2] = LAYOUT( /* LAYER 2 */
     KC_0   , KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
-    _______, KC_PIPE, KC_DQUO, KC_UNDS, KC_PLUS, L_CURBR, R_CURBR, KC_4,    KC_5,    KC_6,    XXXXXXX, _______,
-    _______, KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX, XXXXXXX, XXXXXXX, KC_1,    KC_2,    KC_3,    XXXXXXX, _______,
-    _______, _______, _______,                   _______, _______,                   XXXXXXX, _______, XXXXXXX
+    _______, KC_DQUO, KC_PIPE, KC_UNDS, KC_PLUS, L_CURBR, R_CURBR, KC_4,    KC_5,    KC_6,    XXXXXXX, _______,
+    _______, KC_MUTE, KC_VOLD, KC_VOLU, KC_MRWD, KC_MPLY, KC_MFFD, KC_1,    KC_2,    KC_3,    XXXXXXX, _______,
+    _______, _______, _______,                   _______, _______,                   _______, _______, _______
   ),
 
 
@@ -85,18 +85,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * ,---------+------+------+------+------+------+------+------+------+------+------+-------------.
   * |  RESET  |  F1  |  F2  |  F3  |  F4  |      |      |      |      |      |      |    TRNS     |
   * |---------`------`------`------`------`------`------`------`------`------`------`-------------|
-  * |          |  F5  |  F6  |  F7  |  F8  |      | LEFT | DOWN |  UP  | RIGHT|      |    TRNS    |
+  * |  TRNS    |  F5  |  F6  |  F7  |  F8  |      | LEFT | DOWN |  UP  | RIGHT|      |    TRNS    |
   * |----------`------`------`------`------`------`------`------`------`------`------`------------|
-  * |           |  F9  |  F10 | F11  |  F12 |     |       |      |      |      |      |    TRNS   |
+  * |  TRNS     |  F9  |  F10 | F11  |  F12 |     |       |      |      |      |      |    TRNS   |
   * |-----------`------`------`------`------`-----'-------`------`------`------`------`-----------|
-  * |  TRNS   |  TRNS   |   TRNS  |      TRNS      |     TRNS       |         |         |  TRNS   |
+  * |  TRNS   |  TRNS   |   TRNS  |      TRNS      |     TRNS       |  TRNS   |  TRNS   |  TRNS   |
   *  `--------+---------+---------+------^^^-------+-----^^^--------+---------+---------+---------'
   */
   [_L3] = LAYOUT( /* LAYER 3 */
     RESET,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,  _______,
     _______, KC_F5,   KC_F6,   KC_F7,   KC_F8,   XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, XXXXXXX,  _______,
     _______, KC_F9,   KC_F10,  KC_F11,  KC_F12,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,  _______,
-    _______, _______, _______,                   _______, _______,                   XXXXXXX,  XXXXXXX,  _______
+    _______, _______, _______,                   _______, _______,                   _______,  _______,  _______
   )
 };
 
