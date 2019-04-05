@@ -1,6 +1,7 @@
 #include QMK_KEYBOARD_H
 
-// extern keymap_config_t keymap_config;
+extern rgblight_config_t rgblight_config;
+extern keymap_config_t keymap_config;
 
 // Each layer gets a name for readability, which is then used in the keymap matrix below.
 // The underscores don't mean anything - you can have a layer called STUFF or any other name.
@@ -14,6 +15,7 @@
 
 // Macro name shortcuts
 #define QWERTY  M(_QW)
+#define RGBTGL M(10)
 
 // Curly braces have their own keys. These are defined to make them not mess up
 // the grid in layer 2.
@@ -93,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   *  `--------+---------+---------+------^^^-------+-----^^^--------+---------+---------+---------'
   */
   [_L3] = LAYOUT( /* LAYER 3 */
-    RESET,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,  _______,
+    RESET,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  RGBTGL,   _______,
     _______, KC_F5,   KC_F6,   KC_F7,   KC_F8,   XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, XXXXXXX,  _______,
     _______, KC_F9,   KC_F10,  KC_F11,  KC_F12,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,  _______,
     _______, _______, _______,                   _______, _______,                   _______,  _______,  _______
@@ -108,11 +110,57 @@ void persistent_default_layer_set(uint16_t default_layer) {
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 {
       switch(id) {
-       case _QW:
+        case _QW:
           if (record->event.pressed) {
             persistent_default_layer_set(1UL<<_QW);
           }
           break;
+        case 10: // RGBTGL
+          if (record->event.pressed) {
+            rgblight_toggle();
+          }
       }
     return MACRO_NONE;
 };
+
+
+void matrix_init_user(void) {
+  rgblight_enable();
+  rgblight_setrgb(15, 106, 139);
+}
+
+void matrix_scan_user(void) {
+  #ifdef RGBLIGHT_ENABLE
+
+  static uint8_t old_layer = 255;
+  uint8_t new_layer = biton32(layer_state);
+
+  // Color of the Icons.
+  if (old_layer != new_layer) {
+    switch (new_layer) {
+      case _QW:
+        // #0F6A8B
+        rgblight_setrgb(15, 106, 139);
+        break;
+      case _L1:
+        // #FE7F2D
+        rgblight_setrgb(254, 127, 45);
+        break;
+      case _L2:
+        // #069800
+        rgblight_setrgb(6, 152, 0);
+        break;
+      case _L3:
+        // #D79500
+        rgblight_setrgb(215, 149, 0);
+        break;
+      default: //  for any other layers, or the default layer
+        rgblight_setrgb(15, 106, 139);
+        break;
+    }
+    old_layer = new_layer;
+  }
+  #endif
+}
+
+

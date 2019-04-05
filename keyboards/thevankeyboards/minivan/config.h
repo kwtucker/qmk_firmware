@@ -49,12 +49,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION COL2ROW
 
-// #define BACKLIGHT_PIN B7
+#define BACKLIGHT_PIN B7
 // #define BACKLIGHT_BREATHING
-// #define BACKLIGHT_LEVELS 3
+#define BACKLIGHT_LEVELS 3
+#define USB_MAX_POWER_CONSUMPTION 100
+
+
+#define RGB_DI_PIN D0
+#define RGBLED_NUM 3
+#define RGBLIGHT_CUSTOM_LED_INIT
+#define RGBLIGHT_SLEEP
 
 /* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
 #define DEBOUNCING_DELAY 5
+
+#define TAPPING_TERM      175
 
 /* define if matrix has ghost (lacks anti-ghosting diodes) */
 //#define MATRIX_HAS_GHOST
@@ -66,6 +75,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* Locking resynchronize hack */
 #define LOCKING_RESYNC_ENABLE
 
+
+#define IS_COMMAND() ( \
+    keyboard_report->mods == (MOD_BIT(KC_LSHIFT) | MOD_BIT(KC_RSHIFT)) \
+)
 /*
  * Force NKRO
  *
