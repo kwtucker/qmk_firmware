@@ -48,20 +48,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* Layer 1
   *
   * ,---------+------+------+------+------+------+------+------+------+------+------+-------------.
-  * |   `/~   |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  |    TRNS     |
+  * |    ~    |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  |    TRNS     |
   * |---------`------`------`------`------`------`------`------`------`------`------`-------------|
   * |   TRNS   |   '  |   \  |   -  |   =  |   [  |   ]  |   {  |   }  |   ?  |   :  |    TRNS    |
   * |----------`------`------`------`------`------`------`------`------`------`------`------------|
-  * |   TRNS    |      |  ESC |      |      |     |       |      |   <  |   >  | TRNS |   TRNS    |
+  * |   TRNS    |      |  ESC |      |      |     |   `   |      |   <  |   >  | TRNS |   TRNS    |
   * |-----------`------`------`------`------`-----'-------`------`------`------`------`-----------|
   * |   TRNS  |   TRNS  |   TRNS  |     TRNS       |     TRNS       |  TRNS   |  TRNS   |  TRNS   |
   *  `--------+---------+---------+------^^^-------+-----^^^--------+---------+---------+---------'
   */
   [_L1] = LAYOUT( /* LAYER 1 */
-    KC_GRV,  KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______,
-    _______, KC_QUOT, KC_BSLS, KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, L_CURBR, R_CURBR, KC_QUES, KC_COLN, _______,
-    _______, XXXXXXX, KC_ESC,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_LABK, KC_RABK, _______, _______,
-    _______, _______, _______,                   _______, _______,                   _______, _______, _______
+    KC_TILDE, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______,
+    _______,  KC_QUOT, KC_BSLS, KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, L_CURBR, R_CURBR, KC_QUES, KC_COLN, _______,
+    _______,  XXXXXXX, KC_ESC,  XXXXXXX, XXXXXXX, KC_GRV,  XXXXXXX, XXXXXXX, KC_LABK, KC_RABK, _______, _______,
+    _______,  _______, _______,                   _______, _______,                   _______, _______, _______
   ),
 
  /* LAYER 2
@@ -70,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |---------`------`------`------`------`------`------`------`------`------`------`------------|
  * |   TRNS   |   "  |   |  |   _  |   +  |  {   |  }   |   4  |   5  |   6  |      |    TRNS   |
  * |----------`------`------`------`------`------`------`------`------`------`------`-----------|
- * |   TRNS    | MUTE | VOLD | VOLU |      |      |       |   1  |   2  |   3  |      |  TRNS   |
+ * |   TRNS    | MUTE | VOLD | VOLU | MRWD | MPLY |  MFFD |  1   |   2  |   3  |      |  TRNS   |
  * |-----------`------`------`------`------`------`-------`------`------`------`------`---------|
  * |   TRNS  |   TRNS  |   TRNS  |     TRNS       |     TRNS       |  TRNS   |  TRNS   |  TRNS  |
  *  `--------+---------+---------+------^^^-------+-----^^^--------+---------+---------+--------'
