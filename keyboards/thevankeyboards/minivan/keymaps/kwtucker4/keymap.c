@@ -15,8 +15,8 @@ extern keymap_config_t keymap_config;
 
 // Macro name shortcuts
 #define QWERTY  M(_QW)
-#define RGBTGL M(10)
-
+#define RGBTGL  M(10)
+#define COLEQL  M(11)
 // Curly braces have their own keys. These are defined to make them not mess up
 // the grid in layer 2.
 #define L_CURBR LSFT(KC_LBRC)
@@ -33,16 +33,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |---------`------`------`------`------`------`------`------`------`------`------`-------------|
   * |   OSL_1  |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |    OSL_1   |
   * |----------`------`------`------`------`------`------`------`------`------`------`------------|
-  * | Shift/Esc |   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |   Shift   |
+  * |   Ctrl    |   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |   Shift   |
   * |-----------`------`------`------`------`-----'-------`------`------`------`------`-----------|
-  * |   Ctrl  |   LALT  |   GUI   |      Space     |     Enter      |   OSL_3 |   DF_0  |  Ctrl   |
-  *  `--------+---------+---------+------^^^-------+-----^^^--------+---------+---------+---------'
+  * |   Esc   |   LALT  |   GUI   |     Space      |   Shift/Enter  |   OSL_3 |   DF_0  |  Ctrl   |
+  *  `--------+---------+---------+------^^^-------+-------^^^------+---------+---------+---------'
   */
   [_QW] = LAYOUT( /* Qwerty */
-    KC_TAB,   KC_Q,     KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-    OSL(_L1), KC_A,     KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, OSL(_L2),
-    SFT_ESC,  KC_Z,     KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSHIFT,
-    KC_LCTL,  KC_LALT	, KC_LGUI,                   KC_SPC,  KC_ENT,                    OSL(_L3), DF(_QW), KC_RCTL
+    KC_TAB,   KC_Q,     KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,     KC_U,    KC_I,    KC_O,     KC_P,    KC_BSPC,
+    OSL(_L1), KC_A,     KC_S,    KC_D,    KC_F,    KC_G,    KC_H,     KC_J,    KC_K,    KC_L,     KC_SCLN, OSL(_L2),
+    KC_LCTL,   KC_Z,     KC_X,    KC_C,    KC_V,    KC_B,    KC_N,     KC_M,    KC_COMM, KC_DOT,   KC_SLSH, KC_RSHIFT,
+    KC_ESC,  KC_LALT	, KC_LGUI,                   KC_SPC,  KC_SFTENT,                  OSL(_L3), DF(_QW), KC_RCTL
   ),
 
   /* Layer 1
@@ -52,7 +52,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |---------`------`------`------`------`------`------`------`------`------`------`-------------|
   * |   TRNS   |   '  |   \  |   -  |   =  |   [  |   ]  |   {  |   }  |   ?  |   :  |    TRNS    |
   * |----------`------`------`------`------`------`------`------`------`------`------`------------|
-  * |   TRNS    |      |  ESC |      |      |     |   `   |      |   <  |   >  | TRNS |   TRNS    |
+  * |   TRNS    |      |      |      |  :=  |  `  |       |      |   <  |   >  | TRNS |   TRNS    |
   * |-----------`------`------`------`------`-----'-------`------`------`------`------`-----------|
   * |   TRNS  |   TRNS  |   TRNS  |     TRNS       |     TRNS       |  TRNS   |  TRNS   |  TRNS   |
   *  `--------+---------+---------+------^^^-------+-----^^^--------+---------+---------+---------'
@@ -60,7 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_L1] = LAYOUT( /* LAYER 1 */
     KC_TILDE, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______,
     _______,  KC_QUOT, KC_BSLS, KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, L_CURBR, R_CURBR, KC_QUES, KC_COLN, _______,
-    _______,  XXXXXXX, KC_ESC,  XXXXXXX, XXXXXXX, KC_GRV,  XXXXXXX, XXXXXXX, KC_LABK, KC_RABK, _______, _______,
+    _______,  XXXXXXX, XXXXXXX, XXXXXXX, COLEQL,  KC_GRV,  XXXXXXX, XXXXXXX, KC_LABK, KC_RABK, _______, _______,
     _______,  _______, _______,                   _______, _______,                   _______, _______, _______
   ),
 
@@ -81,7 +81,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, KC_MUTE, KC_VOLD, KC_VOLU, KC_MRWD, KC_MPLY, KC_MFFD, KC_1,    KC_2,    KC_3,    XXXXXXX, _______,
     _______, _______, _______,                   _______, _______,                   _______, _______, _______
   ),
-
 
   /* LAYER 3
   * ,---------+------+------+------+------+------+------+------+------+------+------+-------------.
@@ -113,6 +112,11 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         case _QW:
           if (record->event.pressed) {
             persistent_default_layer_set(1UL<<_QW);
+          }
+          break;
+        case 11:
+          if (record->event.pressed) {
+            SEND_STRING(":=");
           }
           break;
         case 10: // RGBTGL
