@@ -8,20 +8,33 @@ extern keymap_config_t keymap_config;
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
 
-#define _QW 0
-#define _L1 1
-#define _L2 2
-#define _L3 3
+enum {
+	_QW = 0,
+	_L1,
+	_L2,
+	_L3,
+	_RGB,
+	_COLEQL,
+	TD_GUISPC,	
+};
 
 // Macro name shortcuts
 #define QWERTY  M(_QW)
-#define RGBTGL  M(10)
-#define COLEQL  M(11)
+#define RGBTGL  M(_RGB)
+#define COLEQL  M(_COLEQL)
+
 // Curly braces have their own keys. These are defined to make them not mess up
 // the grid in layer 2.
-#define L_CURBR LSFT(KC_LBRC)
-#define R_CURBR LSFT(KC_RBRC)
-#define SFT_ESC SFT_T(KC_ESC)  // Tap for Escape, hold for Shift
+#define L_CURBR  LSFT(KC_LBRC)
+#define R_CURBR  LSFT(KC_RBRC)
+#define SFT_ESC  SFT_T(KC_ESC)  // Tap for Escape, hold for Shift
+#define TD_GS    TD(TD_GUISPC)  // Tap for Escape, hold for Shift
+
+//Tap Dance Definitions
+qk_tap_dance_action_t tap_dance_actions[] = {
+  //Tap once for LGUI, twice for LGUI and SPC 
+  [TD_GUISPC]  = ACTION_TAP_DANCE_DOUBLE(KC_SPC, LGUI(KC_SPC))
+};
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -35,14 +48,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |----------`------`------`------`------`------`------`------`------`------`------`------------|
   * | Shift/Esc |   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |   Shift   |
   * |-----------`------`------`------`------`-----'-------`------`------`------`------`-----------|
-  * |   Ctrl  |   LALT  |   GUI   |      Space     |     Enter      |   OSL_3 |   DF_0  |  Ctrl   |
+  * |   Ctrl  |   LALT  |   GUI   |    TD_GUISPC   |     Enter      |   OSL_3 |   DF_0  |  Ctrl   |
   *  `--------+---------+---------+------^^^-------+-------^^^------+---------+---------+---------'
   */
   [_QW] = LAYOUT( /* Qwerty */
-    KC_TAB,   KC_Q,     KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-    OSL(_L1), KC_A,     KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, OSL(_L2),
-    SFT_ESC,  KC_Z,     KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSHIFT,
-    KC_LCTL,  KC_LALT	, KC_LGUI,                   KC_SPC,  KC_ENT,                    OSL(_L3), DF(_QW), KC_RCTL
+    KC_TAB,   KC_Q,     KC_W,    		   KC_E,    KC_R,  KC_T,    KC_Y,    KC_U,    KC_I,     KC_O,     KC_P,    KC_BSPC,
+    OSL(_L1), KC_A,     KC_S,    		   KC_D,    KC_F,  KC_G,    KC_H,    KC_J,    KC_K,     KC_L,     KC_SCLN, OSL(_L2),
+    SFT_ESC,  KC_Z,     KC_X,    		   KC_C,    KC_V,  KC_B,    KC_N,    KC_M,    KC_COMM,  KC_DOT,   KC_SLSH, KC_RSHIFT,
+    KC_LCTL,  KC_LALT	, KC_LGUI,                TD_GS, KC_ENT,                              OSL(_L3), DF(_QW), KC_RCTL
   ),
 
   /* Layer 1
@@ -114,12 +127,12 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
             persistent_default_layer_set(1UL<<_QW);
           }
           break;
-        case 11:
+        case _COLEQL:
           if (record->event.pressed) {
             SEND_STRING(":=");
           }
           break;
-        case 10: // RGBTGL
+        case _RGB: 
           if (record->event.pressed) {
             rgblight_toggle();
           }
@@ -166,5 +179,4 @@ void matrix_scan_user(void) {
   }
   #endif
 }
-
 
