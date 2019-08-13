@@ -15,7 +15,6 @@ enum {
 	_L3,
 	_RGB,
 	_COLEQL,
-	TD_GUISPC,	
 };
 
 // Macro name shortcuts
@@ -27,24 +26,16 @@ enum {
 // the grid in layer 2.
 #define L_CURBR  LSFT(KC_LBRC)
 #define R_CURBR  LSFT(KC_RBRC)
-#define SFT_ESC  SFT_T(KC_ESC)  // Tap for Escape, hold for Shift
-#define TD_GS    TD(TD_GUISPC)  // Tap for Escape, hold for Shift
-
-//Tap Dance Definitions
-qk_tap_dance_action_t tap_dance_actions[] = {
-  //Tap once for LGUI, twice for LGUI and SPC 
-  [TD_GUISPC]  = ACTION_TAP_DANCE_DOUBLE(KC_SPC, LGUI(KC_SPC))
-};
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
   [_QW] = LAYOUT( /* Qwerty */
-    KC_TAB,    KC_Q,     KC_W,    		   KC_E,    KC_R,  KC_T,    KC_Y,    KC_U,    KC_I,     KC_O,     KC_P,    KC_BSPC,
-    KC_LCTL,   KC_A,     KC_S,    		   KC_D,    KC_F,  KC_G,    KC_H,    KC_J,    KC_K,     KC_L,     KC_SCLN, OSL(_L2),
-    KC_LSHIFT, KC_Z,     KC_X,    		   KC_C,    KC_V,  KC_B,    KC_N,    KC_M,    KC_COMM,  KC_DOT,   KC_SLSH, KC_RSHIFT,
-    OSL(_L1),  KC_LALT,  KC_LGUI,                 KC_SPC,KC_ENT,                              OSL(_L3), DF(_QW), KC_RCTL
+    KC_TAB,    KC_Q,     KC_W,    		   KC_E,    KC_R,  KC_T,    KC_Y,    KC_U,    KC_I,     KC_O,     KC_P,     KC_BSPC,
+    KC_LCTL,   KC_A,     KC_S,    		   KC_D,    KC_F,  KC_G,    KC_H,    KC_J,    KC_K,     KC_L,     KC_SCLN,  OSL(_L2),
+    KC_LSHIFT, KC_Z,     KC_X,    		   KC_C,    KC_V,  KC_B,    KC_N,    KC_M,    KC_COMM,  KC_DOT,   KC_SLSH,  KC_RSHIFT,
+    DF(_QW),  KC_LALT,  KC_LGUI,                 KC_SPC,KC_ENT,                               OSL(_L1), OSL(_L3), KC_RCTL
   ),
 
 
